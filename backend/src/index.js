@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 dotenv.config();
 import authRoutes from "../routes/auth.route.js";
+import movieRoutes from "../routes/movie.route.js";
 const app = express();
 
 mongoose
@@ -21,3 +22,5 @@ app.listen(3000, () => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/movie", movieRoutes);
+app.use(cors());
