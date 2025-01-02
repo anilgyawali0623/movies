@@ -43,4 +43,4 @@ const cinema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Cinema = mongoose.model("Cinema", cinema);
+export  const Cinema = mongoose.model("Cinema", cinema);
