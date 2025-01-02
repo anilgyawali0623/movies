@@ -6,6 +6,7 @@ dotenv.config();
 import authRoutes from "../routes/auth.route.js";
 import movieRoutes from "../routes/movie.route.js";
 import cityRoutes from "../routes/city.route.js";
+import cinemaRoutes from "../routes/cinema.route.js";
 const app = express();
 
 mongoose
@@ -25,4 +26,6 @@ app.listen(3000, () => {
 app.use("/auth", authRoutes);
 app.use("/movie", movieRoutes);
 app.use('/city', cityRoutes);
+app.use('/cinema', cinemaRoutes);
+
 app.use(cors());
