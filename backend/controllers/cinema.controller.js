@@ -1,56 +1,74 @@
+import mongoose from "mongoose";
 import { Cinema } from "../models/cinema.model.js";
 
 import { City } from "../models/city.model.js";
- 
+import { Movie } from "../models/movie.model.js";
+
 export const createCinema = async (req, res) => {
   try {
     const { name } = req.body;
 
-    
     const cinema = new Cinema({ name });
     await cinema.save();
 
     res.status(201).json({ message: "Cinema created successfully", cinema });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while creating the cinema", error: error.message });
+    res.status(500).json({
+      message: "An error occurred while creating the cinema",
+      error: error.message,
+    });
   }
 };
 
-
 export const addMovieToCinema = async (req, res) => {
   try {
-    const { cinemaId } = req.params; 
-    const { movieId, schedule } = req.body; 
-    // Validate the request
-    if (!movieId || !schedule) {
-      return res.status(400).json({ message: "Movie ID and schedule are required" });
+    const { id } = req.params;
+    const { movieId, showtimes } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid cinema ID format" });
     }
 
+    const cinema = await Cinema.findById(id);
+    if (!cinema) {
+      return res.status(404).json({ message: "Cinema not found" });
+    }
+
+    const movie = await Movie.findById(movieId);
+    if (!movie) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+
+    // Update the cinema's schedule
     const updatedCinema = await Cinema.findByIdAndUpdate(
-      cinemaId,
+      id,
       {
         $push: {
           schedule: {
             movie: movieId,
-            showtimes: schedule,
+            showtimes: showtimes,
           },
         },
       },
-    ).populate("schedule.movie"); 
+      { new: true }
+    );
 
     if (!updatedCinema) {
-      return res.status(404).json({ message: "Cinema not found" });
+      return res.status(500).json({ message: "Failed to update cinema" });
     }
 
     res.status(200).json({
-      message: "Movie added to cinema schedule successfully",
+      message: "Movie added to cinema successfully",
       cinema: updatedCinema,
     });
   } catch (error) {
-    res.status(500).json({ message: "An error occurred", error: error.message });
+    console.error("Error:", error.message);
+    res.status(500).json({
+      message: "An error occurred while adding the movie",
+      error: error.message,
+    });
   }
 };
-
 export const getAllCinemas = async (req, res) => {
   try {
     const cinemas = await Cinema.find()
@@ -58,7 +76,10 @@ export const getAllCinemas = async (req, res) => {
       .populate("schedule.movie", "name");
     res.status(200).json(cinemas);
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while fetching cinemas", error: error.message });
+    res.status(500).json({
+      message: "An error occurred while fetching cinemas",
+      error: error.message,
+    });
   }
 };
 
@@ -75,6 +96,9 @@ export const getCinemaById = async (req, res) => {
 
     res.status(200).json(cinema);
   } catch (error) {
-    res.status(500).json({ message: "An error occurred while fetching the cinema", error: error.message });
+    res.status(500).json({
+      message: "An error occurred while fetching the cinema",
+      error: error.message,
+    });
   }
 };
