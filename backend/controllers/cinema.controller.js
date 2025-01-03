@@ -39,7 +39,7 @@ export const addMovieToCinema = async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    // Update the cinema's schedule
+
     const updatedCinema = await Cinema.findByIdAndUpdate(
       id,
       {
