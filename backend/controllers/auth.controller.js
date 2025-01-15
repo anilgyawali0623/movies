@@ -5,7 +5,6 @@ import { sendOTP } from "../src/index.js";
 
 import { errorHandler } from "../utils/error.js";
 export const signup = async (req, res, next) => {
-  console.log("dasfasf");
 
   const { firstname, lastname, email, password, dob } = req.body;
   if (!firstname || !lastname || !email || !password || !dob) {

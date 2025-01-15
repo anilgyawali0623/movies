@@ -1,6 +1,7 @@
 import React from 'react'
 import {createBrowserRouter,BrowserRouter,Route, Routes} from 'react-router-dom'
 import Header from './components/Header'
+import Home from './pages/Home'
 function App() {
   return (
     <div>
@@ -8,7 +9,7 @@ function App() {
       
         <Header/>
         <Routes>
-          <Route path='/' element={<h1>Home</h1>}/>
+          <Route path='/' element={<Home/>}/>
           <Route path='/about' element={<h1>About</h1>}/>
           <Route path='/contact' element={<h1>Contact</h1>}/>
           <Route path='/offer' element={<h1>offer</h1>}/>
