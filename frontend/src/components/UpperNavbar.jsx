@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoLocationSharp } from "react-icons/io5";
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdDataThresholding, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logo from "../../public/logo.png";
 
 function UpperNavbar() {
+  const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const response = await fetch("/api/city/allcity");
+         console.log(response)
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+         console.log(data)
+        setCities(data); 
+      } catch (err) {
+        setError(err.message); 
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchCities();
+  }, []);
+
+   console.log(cities)
+
   return (
     <div className="flex justify-between items-center">
       {/* Left */}
@@ -31,20 +58,12 @@ function UpperNavbar() {
 
           {/* Movies Dropdown */}
           <li className="relative group">
-            <button className=" flex items-center">
-              Movies 
-            </button>
+            <button className=" flex items-center">Movies</button>
             <div className="absolute left-0 hidden mt-2 space-y-2 w-24  bg-black text-white p-2 rounded-md shadow-lg group-hover:block group-target:block">
-              <Link
-                to="/now-showing"
-                className="block p-2 hover:bg-gray-700"
-              >
+              <Link to="/now-showing" className="block p-2 hover:bg-gray-700">
                 now showing
               </Link>
-              <Link
-                to="/coming-soon"
-                className="block p-2 hover:bg-gray-700"
-              >
+              <Link to="/coming-soon" className="block p-2 hover:bg-gray-700">
                 Coming Soon
               </Link>
             </div>

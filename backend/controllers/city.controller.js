@@ -65,6 +65,7 @@ export const addCinemasToCity = async (req, res) => {
 export const getAllCities = async (req, res) => {
   try {
     const cities = await City.find().sort({ name: 1 });
+     console.log(cities)
     res.status(200).json(cities);
   } catch (error) {
     res
