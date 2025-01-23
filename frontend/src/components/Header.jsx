@@ -7,7 +7,7 @@ function Header() {
     <div className='w-full h-32 bg-[#414042] p-5 fixed top-0 z-50'>
       
       <UpperNavbar/>
-      <LowerNavbar/>
+      {/* <LowerNavbar/> */}
     </div>
   )
 }
