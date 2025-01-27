@@ -8,7 +8,7 @@ function UpperNavbar() {
   const [cities, setCities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+  console.log(cities)
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -18,7 +18,7 @@ function UpperNavbar() {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
-         console.log(data)
+        //  console.log(data)
         setCities(data); 
       } catch (err) {
         setError(err.message); 
@@ -30,7 +30,7 @@ function UpperNavbar() {
     fetchCities();
   }, []);
 
-   console.log(cities)
+  //  console.log(cities)
 
   return (
     <div className="flex justify-between items-center">

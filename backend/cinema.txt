@@ -1,0 +1,36 @@
+Elite Cinema - ID: 67761ec0ab71e12d266a96fb
+qfx labim mall - ID: 67767b48c8d9cc535c2bf1b6
+qfx civil mall - ID: 67767b6c3b47580069136449
+qfx civil mall - ID: 67768d54ad01e3acf6905421
+qfx civil mall - ID: 6776c5f0ce11dde0c0c13158
+qfx bageshowri - ID: 6776d4661046c9272866ef1c
+qfx bageshowri - ID: 6794db43c972145b67d33219
+qfx bageshowri - ID: 6794db47c972145b67d3321b
+qfx a bageshowri - ID: 6794db51c972145b67d3321d
+Cinema A - ID: 679509f6f6b1b45ad817676e
+Cinema B - ID: 679509fef6b1b45ad8176770
+Cinema C - ID: 67950a02f6b1b45ad8176772
+Cinema D - ID: 67950a0bf6b1b45ad8176774
+Cinema E - ID: 67950a10f6b1b45ad8176776
+Cinema F - ID: 67950a16f6b1b45ad8176778
+
+
+Avengers: Endgame - ID: 6770dbbd3465f3d64245f23d
+Avengers: Endgame - ID: 6770dc003465f3d64245f23f
+Avengers: Endgame - ID: 6770dc1f16405eea88b870e2
+Avengers: Endgame - ID: 6770dc8d16405eea88b870e4
+Avengers: Endgame - ID: 6770dc9f86127803e669ce59
+Avengers: INFINITY - ID: 6770dd2786127803e669ce5d
+Avengers: anil gyawali - ID: 6770dd73e4a5f62165f5b0d0
+Avengers: doomsday - ID: 6770dddd8eca8d0f5493b090
+Avengers: doomsday - ID: 67768ba9848e3d15e995ac82
+Avengers: doomsday - ID: 6776c617ce11dde0c0c1315a
+The Dark Knight - ID: 6794debae01a07ebbcdbdfad
+Inception - ID: 6794ded7e01a07ebbcdbdfaf
+Avengers: Endgame - ID: 6794df12e01a07ebbcdbdfb1
+Interstellar - ID: 6794df30e01a07ebbcdbdfb3
+The Godfather - ID: 6794df42e01a07ebbcdbdfb5
+Spirited Away - ID: 6794df54e01a07ebbcdbdfb7
+The Shawshank Redemption - ID: 6794df68e01a07ebbcdbdfb9
+The Matrix - ID: 6794df75e01a07ebbcdbdfbb
+Joker - ID: 6794df80e01a07ebbcdbdfbd

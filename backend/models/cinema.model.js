@@ -9,7 +9,7 @@ const cinemaSchema = new mongoose.Schema(
    
     schedule: [
       {
-        movie: {
+        movieId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Movie", 
         },

@@ -23,7 +23,7 @@ export const createCinema = async (req, res) => {
 export const addMovieToCinema = async (req, res) => {
   try {
     const { id } = req.params;
-    const { movieId, showtimes } = req.body;
+    const { schedule } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: "Invalid cinema ID format" });
@@ -34,31 +34,29 @@ export const addMovieToCinema = async (req, res) => {
       return res.status(404).json({ message: "Cinema not found" });
     }
 
-    const movie = await Movie.findById(movieId);
-    if (!movie) {
-      return res.status(404).json({ message: "Movie not found" });
-    }
+    const newSchedule = await Promise.all(
+      schedule.map(async (item) => {
+        const { movieId, showtimes } = item;
 
+        const movie = await Movie.findById(movieId);
+        if (!movie) {
+          throw new Error(`Movie with ID ${movieId} not found`);
+        }
 
-    const updatedCinema = await Cinema.findByIdAndUpdate(
-      id,
-      {
-        $push: {
-          schedule: {
-            movie: movieId,
-            showtimes: showtimes,
-          },
-        },
-      },
-      { new: true }
+        if (!showtimes || !Array.isArray(showtimes) || showtimes.length === 0) {
+          throw new Error("Showtimes must be an array of strings.");
+        }
+
+        return { movieId, showtimes };
+      })
     );
 
-    if (!updatedCinema) {
-      return res.status(500).json({ message: "Failed to update cinema" });
-    }
+    cinema.schedule.push(...newSchedule);
+
+    const updatedCinema = await cinema.save();
 
     res.status(200).json({
-      message: "Movie added to cinema successfully",
+      message: "Movies added to cinema successfully",
       cinema: updatedCinema,
     });
   } catch (error) {
@@ -69,11 +67,11 @@ export const addMovieToCinema = async (req, res) => {
     });
   }
 };
+
 export const getAllCinemas = async (req, res) => {
   try {
     const cinemas = await Cinema.find()
-      .populate("city", "name")
-      .populate("schedule.movie", "name");
+   
     res.status(200).json(cinemas);
   } catch (error) {
     res.status(500).json({
