@@ -34,3 +34,16 @@ Spirited Away - ID: 6794df54e01a07ebbcdbdfb7
 The Shawshank Redemption - ID: 6794df68e01a07ebbcdbdfb9
 The Matrix - ID: 6794df75e01a07ebbcdbdfbb
 Joker - ID: 6794df80e01a07ebbcdbdfbd
+
+
+
+
+
+
+
+
+Biratnagar - ID: 67761b0eb7792c464aadac70
+Butwal - ID: 67761b06b7792c464aadac6d
+Kathmandu - ID: 67761af4b7792c464aadac67
+Nepalgunj - ID: 67761b00b7792c464aadac6a
+Palpa - ID: 679267b9fbb283897ea413f5
