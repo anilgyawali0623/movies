@@ -84,16 +84,25 @@ export const getAllCinemas = async (req, res) => {
 export const getCinemaById = async (req, res) => {
   try {
     const { id } = req.params;
-    const cinema = await Cinema.findById(id)
-      .populate("city", "name")
-      .populate("schedule.movie", "name");
 
+    // Validate cinema ID
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid cinema ID format" });
+    }
+
+    // Find the cinema and populate the movie details
+    const cinema = await Cinema.findById(id).populate("schedule.movieId");
+
+    // Check if cinema exists
     if (!cinema) {
       return res.status(404).json({ message: "Cinema not found" });
     }
+    
 
-    res.status(200).json(cinema);
+    // Return the cinema with populated movie details
+    res.status(200).json({ cinema });
   } catch (error) {
+    console.error("Error:", error.message);
     res.status(500).json({
       message: "An error occurred while fetching the cinema",
       error: error.message,

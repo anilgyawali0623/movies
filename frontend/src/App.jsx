@@ -3,32 +3,7 @@ import {createBrowserRouter,BrowserRouter,Route, Routes} from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
 function App() {
- const [cinema , setCinema]= useState([]);
-const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-   useEffect(() => {
-      const fetchChinema = async () => {
-        try {
-          const response = await fetch("api/cinema/allcinema");
-          
-          if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
-          }
-          const data = await response.json();
-           
-          setCinema(data)
-           console.log(data)
-
-        } catch (err) {
-          setError(err.message); 
-        } finally {
-          setLoading(false); 
-        }
-      };
-  
-      fetchChinema();
-    }, []);
   return (
     <div>
       <BrowserRouter>

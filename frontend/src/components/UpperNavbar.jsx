@@ -5,32 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../../public/logo.png";
 
 function UpperNavbar() {
-  const [cities, setCities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  console.log(cities)
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const response = await fetch("/api/city/allcity");
-         console.log(response)
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
-        const data = await response.json();
-        //  console.log(data)
-        setCities(data); 
-      } catch (err) {
-        setError(err.message); 
-      } finally {
-        setLoading(false); 
-      }
-    };
-
-    fetchCities();
-  }, []);
-
-  //  console.log(cities)
+ 
 
   return (
     <div className="flex justify-between items-center">
