@@ -57,7 +57,7 @@ function LowerNavbar() {
       : [];
 
   return (
-    <div>
+    <div className="flex items-center justify-between mt-2">
       <select value={cinema.id} onChange={handleCinemaChange}>
         <option value="">Select Cinema</option>
         {cinemas?.map(({ name, _id }) => (
@@ -71,8 +71,10 @@ function LowerNavbar() {
         value={movie.id}
         onChange={handleMovieChange}
         disabled={!cinema.id || loading}
+        
+
       >
-        <option value="">Select Movie</option>
+        <option value="" className="text-[16px]">Select Movie</option>
         {cinemaData?.cinema?.schedule?.map(({ movieId }) => (
           <option key={movieId._id} value={movieId._id}>
             {movieId.name}
@@ -105,18 +107,11 @@ function LowerNavbar() {
           </option>
         ))}
       </select>
+      <button type="button" class="  bg-[black] font-medium rounded-lg text-sm px-14 py-2.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-[#edf0f3]">Buy Now</button>
 
-      {cinema.id && movie.id && date && time && (
-        <div className="p-2 border rounded mt-4">
-          <h4>Selected:</h4>
-          <p>Cinema: {cinema.name}</p>
-          <p>Movie: {movie.name}</p>
-          <p>Date: {date}</p>
-          <p>Time: {time}</p>
-        </div>
-      )}
+    
 
-      {loading && <p>Loading...</p>}
+      
     </div>
   );
 }
