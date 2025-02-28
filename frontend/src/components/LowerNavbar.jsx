@@ -107,7 +107,7 @@ function LowerNavbar() {
           </option>
         ))}
       </select>
-      <button type="button" class="  bg-[black] font-medium rounded-lg text-sm px-14 py-2.5  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 text-[#edf0f3]">Buy Now</button>
+      <button type="button" class="   font-medium rounded-lg text-sm px-14 py-2.5  bg-[#3a383b] dark:focus:ring-purple-900 text-[#edf0f3]">Buy Now</button>
 
     
 

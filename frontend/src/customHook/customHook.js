@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useFetchData = (endpoint) => {
   const [data, setData] = useState([]);
@@ -6,6 +6,11 @@ const useFetchData = (endpoint) => {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
+    if (!endpoint) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(`/api/${endpoint}`);
       if (!response.ok) {
@@ -22,7 +27,7 @@ const useFetchData = (endpoint) => {
 
   useEffect(() => {
     fetchData();
-  }, [endpoint]); 
+  }, [endpoint]);
 
   return { data, loading, error };
 };

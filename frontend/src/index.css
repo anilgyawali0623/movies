@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-    select {
-      @apply w-[190px] h-9 border-0 border-b border-white outline-none bg-transparent text-white text-[16px] leading-[24px] focus:outline-none focus:ring-0
-    }
-    option{
-        @apply bg-[#414042] text-white
-    }
+  select {
+    @apply w-[190px] h-9 border-0 border-b border-white outline-none bg-transparent text-white text-[16px] leading-[24px] focus:outline-none focus:ring-0 max-h-[60px] overflow-y-auto;
   }
-
-
-  
+  option {
+    @apply bg-[#414042] text-white;
+  }
+}
