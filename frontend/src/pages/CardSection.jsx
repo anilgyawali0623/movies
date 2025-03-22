@@ -12,8 +12,8 @@ function CardSection() {
     </div>
      <div className='card-section flex flex-wrap gap-x-10 gap-y-7 flex-row'>
       {
-        data.map(({name:title, genre, ageRating:rating, _id})=>(
-     <Card title={title} genre={genre} rating={rating} poster={"a"} id={_id}/>
+        data.map(({name:title, genre, ageRating:rating, _id}, index)=>(
+     <Card title={title} genre={genre} rating={rating} poster={"a"} id={_id} key={index}/>
 
         ))
       }

@@ -3,9 +3,11 @@ import { IoLocationSharp } from "react-icons/io5";
 import { MdDataThresholding, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 import logo from "../../public/logo.png";
-
+ import {useDispatch} from "react-redux"
+import {showSignUp} from '../redux/user/userSlice'
+import SignUpPage from "./SignUp";
 function UpperNavbar() {
- 
+ const dispatch=useDispatch();
 
   return (
     <div className="flex justify-between items-center">
@@ -48,7 +50,8 @@ function UpperNavbar() {
           <li>CUSTOMER SERVICE</li>
 
           <button
-            type="submit"
+             onClick={()=> dispatch(showSignUp())}
+            
             className="text-white bg-[blue] font-medium rounded-lg text-sm px-4 py-2"
           >
             Sign In

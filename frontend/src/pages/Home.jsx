@@ -3,6 +3,7 @@ import ImageSlider from '../components/ImageSlider';
  import img from '../../public/asset2.jpeg'
 
 import CardSection from './CardSection';
+import SignUpPage from '../components/SignUp';
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
     >
       <ImageSlider />
       <CardSection/>
+      <SignUpPage/>
     </div>
   );
 }
