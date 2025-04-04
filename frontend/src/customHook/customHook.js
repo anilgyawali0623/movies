@@ -13,6 +13,7 @@ const useFetchData = (endpoint) => {
 
     try {
       const response = await fetch(`/api/${endpoint}`);
+       console.log(response)
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }

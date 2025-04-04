@@ -20,7 +20,7 @@ mongoose
   });
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-app.listen(3006, () => {
+app.listen(3090, () => {
     console.log("server is running on port 3000");
 });
 

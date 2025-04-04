@@ -12,6 +12,7 @@ const user = new mongoose.Schema(
       type: String,
       required: true,
       lowercase: true,
+       default:"",
       trim: true,
     },
     email: {
@@ -28,7 +29,9 @@ const user = new mongoose.Schema(
     },
     dob: {
       type: Date,
-      required: true,
+  
+
+      
     },
     refreshToken: {
       type: String,

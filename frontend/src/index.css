@@ -9,3 +9,10 @@
     @apply bg-[#414042] text-white;
   }
 }
+.form-container {
+  display: none;
+}
+
+.form-container.active {
+  display: block;
+}

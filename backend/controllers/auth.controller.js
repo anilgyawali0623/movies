@@ -9,8 +9,8 @@ export const signup = async (req, res, next) => {
   if (!firstname || !lastname || !email || !password || !dob) {
     next(errorHandler(400, "All fields are required"));
   }
-  console.log(firstname, lastname, email, password, dob);
   const hashedPassword = bcryptjs.hashSync(password, 10);
+
   const newUser = new User({
     firstname,
     lastname,
@@ -20,7 +20,8 @@ export const signup = async (req, res, next) => {
   });
   try {
     await newUser.save();
-    res.json({ message: "User created successfully" });
+    const { password: pass, ...rest } = newUser._doc;
+    res.json(rest);
   } catch (error) {
     next(errorHandler(400, error.message));
   }
@@ -115,48 +116,87 @@ export const resetPassword = async (req, res) => {
       error: error.message,
     });
   }
-  s;
 };
 
 export const google = async (req, res, next) => {
   const { email, name, googlePhotoUrl } = req.body;
+  console.log("Google Auth:", email, name);
+
   try {
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
+
     if (user) {
       const token = jwt.sign({ id: user._id }, process.env.ACESS_TOKEN_SECRET);
       const { password, ...rest } = user._doc;
-      res
+      return res
         .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
-        .json(rest);
-    } else {
-      const generatedPassword =
-        Math.random().toString(36).slice(-8) +
-        Math.random().toString(36).slice(-8);
-      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
-      const newUser = new User({
-        firstname:
-          name.toLowerCase().split(" ").join("") +
-          Math.random().toString(9).slice(-4),
-        email,
-        password: hashedPassword,
-        profilePicture: googlePhotoUrl,
-      });
-      await newUser.save();
-      const token = jwt.sign(
-        { id: newUser._id },
-        process.env.ACESS_TOKEN_SECRET
-      );
-      const { password, ...rest } = newUser._doc;
-      res
-        .status(200)
-        .cookie("access_token", token, {
-          httpOnly: true,
-        })
+        .cookie("access_token", token, { httpOnly: true })
         .json(rest);
     }
+
+    // Create new user
+    const generatedPassword = Math.random().toString(36).slice(-8);
+    const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+
+    const newUser = new User({
+      firstname: name.split(" ")[0] || "GoogleUser",
+      lastname: name.split(" ")[1] || "User",
+      email,
+      password: hashedPassword,
+      profilePicture: googlePhotoUrl,
+    });
+
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id }, process.env.ACESS_TOKEN_SECRET);
+
+    const { password, ...rest } = newUser._doc;
+    res
+      .status(200)
+      .cookie("access_token", token, { httpOnly: true })
+      .json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signin = async(req, res, next) => {
+    const {email, password}= req.body;
+    if(!email || !password ||  email==="" || password ===""){
+       next(errorHandler(400, 'all fields are required'));
+    }
+
+
+     try {
+       const validUser=await User.findOne({email});
+        if(!validUser){
+           return next(errorHandler(400,"user email not found"));
+        }
+         const  validPassword=  bcryptjs.compareSync(password, validUser.password);
+          if(!validPassword){
+             return next(errorHandler(400, 'invalid password'));
+          }
+
+ const token= jwt.sign({id:validEmail._id}, process.env.ACESS_TOKEN_SECRET)
+  const {password:pass, ...rest}= validUser._doc;
+
+  res
+  .status(200)
+  .cookie('access_token', token, {
+     httpOnly:true
+  })
+.json(rest);
+     } catch (error) {
+       next(error)
+     }
+
+};
+export const signout = (req, res, next) => {
+  try {
+    res
+      .clearCookie("access_token")
+      .status(200)
+      .json("user has been signed out");
   } catch (error) {
     next(error);
   }
